@@ -1,4 +1,6 @@
-# Recoil
+# Recoil 
+
+**Note:** temporary package for React Native support in [RecoilJS](https://github.com/facebookexperimental/Recoil)
 
 Recoil is an experimental set of utilities for state management with React. Please see the website: https://recoiljs.org
 

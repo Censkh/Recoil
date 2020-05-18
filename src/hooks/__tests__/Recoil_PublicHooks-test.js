@@ -19,7 +19,8 @@ import type {
 
 const React = require('React');
 const {useEffect, useState} = require('React');
-const ReactDOM = require('ReactDOM');
+const batchedUpdates = require('../../util/Recoil_batchedUpdates');
+
 const {act} = require('ReactTestUtils');
 const atom = require('../../recoil_values/Recoil_atom');
 const errorSelector = require('../../recoil_values/Recoil_error');
@@ -378,7 +379,7 @@ test('Selector functions are evaluated just once even if multiple upstreams chan
   </>);
   expect(selectorFn).toHaveBeenCalledTimes(1);
   act(() => {
-    ReactDOM.unstable_batchedUpdates(() => {
+    batchedUpdates(() => {
       updateValueA(1);
       updateValueB(1);
     });
@@ -396,7 +397,7 @@ test('Component that depends on multiple atoms via selector is rendered just onc
   renderElements(<><ComponentA /><ComponentB /><ReadComp /></>);
   expect(ReadComp).toHaveBeenCalledTimes(2);
   act(() => {
-    ReactDOM.unstable_batchedUpdates(() => {
+    batchedUpdates(() => {
       updateValueA(1);
       updateValueB(1);
     });
@@ -413,7 +414,7 @@ test('Component that depends on multiple atoms directly is rendered just once', 
   renderElements(<><ComponentA /><ComponentB /><ReadComp /></>);
   expect(ReadComp).toHaveBeenCalledTimes(2);
   act(() => {
-    ReactDOM.unstable_batchedUpdates(() => {
+    batchedUpdates(() => {
       updateValueA(1);
       updateValueB(1);
     });
@@ -428,7 +429,7 @@ test('Component is rendered just once when atom is changed twice', () => {
   renderElements(<><ComponentA /><ReadComp /></>);
   expect(ReadComp).toHaveBeenCalledTimes(2);
   act(() => {
-    ReactDOM.unstable_batchedUpdates(() => {
+    batchedUpdates(() => {
       updateValueA(1);
       updateValueA(2);
     });
@@ -457,7 +458,7 @@ test('Can subscribe to and also change an atom in the same batch', () => {
   expect(container.textContent).toEqual('');
 
   act(() => {
-    ReactDOM.unstable_batchedUpdates(() => {
+    batchedUpdates(() => {
       setVisible(true);
       updateValue(1337);
     });
@@ -697,7 +698,7 @@ test('Selector depedencies are updated transactionally', () => {
   </>);
 
   act(() => {
-    ReactDOM.unstable_batchedUpdates(() => {
+    batchedUpdates(() => {
       updateValueA(1);
       updateValueB(1);
     });

@@ -1,10 +1,10 @@
 {
-  "name": "recoil",
-  "version": "0.0.7",
+  "name": "recoil-react-native",
+  "version": "0.0.7-patch2",
   "description": "Recoil - A React state management library for complex UIs",
   "main": "dist/index.js",
   "files": [
-    "dist/recoil.js"
+    "dist"
   ],
   "repository": "https://github.com/facebookexperimental/recoil.git",
   "license": "MIT",
@@ -16,7 +16,8 @@
   },
   "peerDependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-native": "^0.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
