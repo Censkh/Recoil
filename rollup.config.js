@@ -1,10 +1,11 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
 import {terser} from 'rollup-plugin-terser';
 
 const config = mode => ({
-  input: 'src/Recoil.js',
+  input: 'src/Recoil_index.js',
   output: {
     file: `dist/recoil.${mode}.js`,
     format: 'cjs',
@@ -34,6 +35,7 @@ const config = mode => ({
     },
     nodeResolve(),
     commonjs(),
+    replace({__DEV__: JSON.stringify(mode === 'development')}),
     mode === 'development' ? undefined : terser({mangle: false}),
   ],
 });
